@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 224 76% 48%;
+    --primary-foreground: 210 40% 98%;
+    --primary-hover: 224 76% 40%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 224 76% 48%;
+
+    --radius: 0.5rem;
+
+    /* Semantic Status Colors */
+    --status-new: 217 91% 60%;
+    --status-assigned: 262 83% 58%;
+    --status-progress: 38 92% 50%;
+    --status-waiting: 199 89% 48%;
+    --status-resolved: 158 64% 42%;
+    --status-closed: 215 16% 47%;
+    --status-reopened: 346 84% 55%;
+    --status-escalated: 0 84% 60%;
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 210 40% 98%;
+
+    --card: 224 71% 7%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 224 71% 7%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
+    --primary-hover: 217 91% 68%;
+
+    --secondary: 217 33% 15%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 12%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 33% 15%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 217 91% 60%;
+
+    /* Semantic Status Colors for Dark Mode */
+    --status-new: 217 91% 65%;
+    --status-assigned: 262 83% 65%;
+    --status-progress: 38 92% 55%;
+    --status-waiting: 199 89% 55%;
+    --status-resolved: 158 64% 48%;
+    --status-closed: 215 20% 65%;
+    --status-reopened: 346 84% 65%;
+    --status-escalated: 0 84% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.45);
+}
