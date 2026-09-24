@@ -1,9 +1,15 @@
 # EduHelp — Student Support & Ticket Management
 
-> **Repository**: [https://github.com/aravindbala03112003/eduhelp-student-support](https://github.com/aravindbala03112003/eduhelp-student-support)  
-> **Tagline**: *"One place for every student request."*  
-> **Prepared for**: Edumerge Solutions Technical / Product Engineering Assessment  
-> **Technology Stack**: React 18, Vite, TypeScript, Tailwind CSS, Recharts, Node.js, Express, PostgreSQL 18, Flutter (Android), Vitest.
+> 🌐 **Live Web Application**: **[https://aravindbala03112003.github.io/eduhelp-student-support/](https://aravindbala03112003.github.io/eduhelp-student-support/)**  
+> 📦 **GitHub Repository**: [https://github.com/aravindbala03112003/eduhelp-student-support](https://github.com/aravindbala03112003/eduhelp-student-support)  
+> 🏷️ **Tagline**: *"One place for every student request."*  
+> 🎓 **Prepared for**: Edumerge Solutions Technical / Product Engineering Assessment  
+> ⚙️ **Technology Stack**: React 18, Vite, TypeScript, Tailwind CSS, Recharts, Node.js, Express, PostgreSQL 18, Flutter (Android), Vitest.
+
+---
+
+### 🚀 Instant Live Demo
+Click the live link above to test the full SaaS application directly in your browser with **1-Click Demo Logins** for Student, Support Staff, and Operations Manager. All features (Request Creation, Dynamic SLA calculation, Recharts Analytics, Ageing, Staff Workload, and Dark/Light Mode) are completely interactive.
 
 ---
 
