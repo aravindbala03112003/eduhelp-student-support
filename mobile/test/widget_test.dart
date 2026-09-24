@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:eduhelp_mobile/widgets/status_chip.dart';
 import 'package:eduhelp_mobile/widgets/priority_chip.dart';
+import 'package:eduhelp_mobile/widgets/sla_badge.dart';
 
 void main() {
   testWidgets('StatusChip renders correct badge label and styling', (WidgetTester tester) async {
@@ -34,4 +35,38 @@ void main() {
 
     expect(find.text('URGENT'), findsOneWidget);
   });
+
+  testWidgets('SlaBadge renders BREACHED state correctly', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: SlaBadge(
+            status: 'BREACHED',
+            remainingFormatted: 'Breached by 2h 15m',
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('Breached by 2h 15m'), findsOneWidget);
+    expect(find.byIcon(Icons.error_outline), findsOneWidget);
+  });
+
+  testWidgets('SlaBadge renders AT_RISK state correctly', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: SlaBadge(
+            status: 'AT_RISK',
+            remainingFormatted: '3h 10m remaining',
+            isAtRisk: true,
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('3h 10m remaining'), findsOneWidget);
+    expect(find.byIcon(Icons.warning_amber_rounded), findsOneWidget);
+  });
 }
+

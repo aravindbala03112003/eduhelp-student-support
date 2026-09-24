@@ -287,9 +287,13 @@ npm run dev
 cd mobile
 flutter pub get
 flutter test
-flutter build apk --debug
+flutter build apk --release --split-per-abi
 ```
-*The compiled Android APK is also directly downloadable from the Web App at `/mobile/eduhelp-companion-v1.0.0.apk`.*
+*Official Production APK: Download the verified release APK directly from [GitHub Release v1.0.0](https://github.com/aravindbala03112003/eduhelp-student-support/releases/tag/v1.0.0):*
+- **[EduHelp-Android-v1.0.0-arm64.apk (16.58 MB)](https://github.com/aravindbala03112003/eduhelp-student-support/releases/download/v1.0.0/EduHelp-Android-v1.0.0-arm64.apk)** — Optimized for modern 64-bit Android smartphones.
+- **[EduHelp-Android-v1.0.0-universal.apk (46.48 MB)](https://github.com/aravindbala03112003/eduhelp-student-support/releases/download/v1.0.0/EduHelp-Android-v1.0.0-universal.apk)** — Universal package for all devices.
+*For detailed size metrics and reduction benchmarks, see [docs/APK_SIZE_OPTIMIZATION.md](file:///c:/Users/Asus/Desktop/EDUHELP/docs/APK_SIZE_OPTIMIZATION.md).*
+
 
 ---
 
@@ -313,4 +317,6 @@ flutter build apk --debug
 ## 18. Additional Documentation
 - [docs/architecture.md](file:///c:/Users/Asus/Desktop/EDUHELP/docs/architecture.md) — Comprehensive technical design, ER diagrams, and lifecycle state machines.
 - [docs/approach.md](file:///c:/Users/Asus/Desktop/EDUHELP/docs/approach.md) — Product decisions, user journeys, SLA strategy, and engineering trade-offs.
+- [docs/APK_SIZE_OPTIMIZATION.md](file:///c:/Users/Asus/Desktop/EDUHELP/docs/APK_SIZE_OPTIMIZATION.md) — Comprehensive Flutter Android APK size optimization report (137 MB down to 16.58 MB).
 - [docs/AI_USAGE_REPORT.md](file:///c:/Users/Asus/Desktop/EDUHELP/docs/AI_USAGE_REPORT.md) — Authentic AI-assisted engineering report detailing prompt workflows, challenges, and validations.
+

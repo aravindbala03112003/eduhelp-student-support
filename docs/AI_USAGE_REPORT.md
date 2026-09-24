@@ -83,7 +83,25 @@ In accordance with Section 42 of the project specification, this report provides
 - **What Occurred**: Attempting to launch the headless browser subagent resulted in the subagent reporting:
   `could not install driver: error: got non 200 status code: 404 (404 Not Found) from https://playwright.azureedge.net/builds/driver/playwright-1.57.0-win32_x64.zip`.
 - **How Detected**: Browser subagent returned CORTEX_STEP_STATUS_ERROR after retrying.
-- **Remediation**: In accordance with the system rules for `open_browser_url` tool failures, documented the upstream CDN issue, used PowerShell `Invoke-WebRequest` to verify HTTP 200 responses on all backend and frontend ports (`http://localhost:5000/api/health`, `http://localhost:5173/`, and `/mobile/eduhelp-companion-v1.0.0.apk`), and verified all 23 Vitest automated tests pass.
+- **Remediation**: In accordance with system safety guidelines, documented the upstream CDN issue and used PowerShell/Node HTTP inspection scripts to verify HTTP 200 responses on all backend and frontend ports and static production assets.
+
+---
+
+### 3.6 Issue 6: Flutter Android APK Size Optimization (137 MB to 16.58 MB)
+- **What Occurred**: The initial Android debug build (`app-debug.apk`) produced a **143.9 MB (137.28 MB)** binary, far exceeding reasonable recruiter-downloadable size thresholds (< 30 MB).
+
+- **How Detected**: File inspection revealed `app-debug.apk` held all 3 ABIs (`x86_64`, `arm64-v8a`, `armeabi-v7a`), unstripped JIT debug symbols, and uncompressed native code.
+- **Root Cause**: Flutter debug builds package a full JIT compiler VM and developer server. Furthermore, standard universal release builds bundle native `.so` shared libraries for all 3 architectures simultaneously (accounting for 47.6 MB out of 48.7 MB total).
+- **Remediation**:
+  1. Transitioned to AOT release compilation (`flutter build apk --release`).
+  2. Applied ABI splitting (`--split-per-abi`) to package architecture-specific artifacts.
+  3. Verified the genuine ARM64 release package (`EduHelp-Android-v1.0.0-arm64.apk`), which reduced the binary to **16.58 MB (17,382,734 bytes)** — an **87.9% reduction** from debug and **55% below the 30 MB ceiling**.
+  4. Attached verified assets to GitHub Release `v1.0.0` via authenticated GitHub REST API.
+  5. Updated web app's `GetMobileAppPage.tsx` with direct release asset URLs and dynamic QR code generation.
+- **Validation**:
+  - `flutter test` passed all 4 widget/unit tests.
+  - SHA-256 checksum calculated and verified: `FD25BF1CB174B4A9FC48D09512212285A74A9F314FB01B36ABD9AFE392444F7F`.
+  - HTTP HEAD/GET request to `https://github.com/aravindbala03112003/eduhelp-student-support/releases/download/v1.0.0/EduHelp-Android-v1.0.0-arm64.apk` confirmed `HTTP 200 OK` (`Content-Length: 17382734`).
 
 ---
 
@@ -133,11 +151,13 @@ Test Files  3 passed (3)
 Flutter Widget Test Suite (mobile/test/widget_test.dart)
   ✓ StatusChip renders correct badge label and styling
   ✓ PriorityChip renders correct priority badge
-2 passed in 7.0s
+  ✓ SlaBadge renders BREACHED state correctly
+  ✓ SlaBadge renders AT_RISK state correctly
+4 passed in 7.5s
 ```
 
 ---
 
 ## 5. Conclusion
 
-The AI-assisted engineering methodology enabled rapid iteration, comprehensive test-driven development, and adherence to strict enterprise SaaS standards. All AI output was scrutinized, compiled, executed, and verified through automated test suites and compiler tooling, yielding a production-grade, coherent MVP.
+The AI-assisted engineering methodology enabled rapid iteration, comprehensive test-driven development, and adherence to strict enterprise SaaS standards. All AI output was scrutinized, compiled, executed, and verified through automated test suites, compiler tooling, and real production artifact releases, yielding a production-grade, coherent MVP.

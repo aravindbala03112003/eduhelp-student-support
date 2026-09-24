@@ -16,15 +16,21 @@ import { Button } from '../components/common/Button.js';
 export const GetMobileAppPage: React.FC = () => {
   const [downloadStarted, setDownloadStarted] = useState(false);
 
-  // APK download URL using deployment base
-  const apkDownloadUrl = `${import.meta.env.BASE_URL}mobile/eduhelp-companion-v1.0.0.apk`;
+  // Official Verified GitHub Release APK URLs
+  const apkDownloadUrl =
+    'https://github.com/aravindbala03112003/eduhelp-student-support/releases/download/v1.0.0/EduHelp-Android-v1.0.0-arm64.apk';
+  const universalApkUrl =
+    'https://github.com/aravindbala03112003/eduhelp-student-support/releases/download/v1.0.0/EduHelp-Android-v1.0.0-universal.apk';
+  const releasePageUrl =
+    'https://github.com/aravindbala03112003/eduhelp-student-support/releases/tag/v1.0.0';
 
-  const handleDownload = () => {
+  const handleDownload = (targetUrl = apkDownloadUrl, fileName = 'EduHelp-Android-v1.0.0-arm64.apk') => {
     setDownloadStarted(true);
-    // Trigger download
     const link = document.createElement('a');
-    link.href = apkDownloadUrl;
-    link.download = 'eduhelp-companion-v1.0.0.apk';
+    link.href = targetUrl;
+    link.download = fileName;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -36,7 +42,7 @@ export const GetMobileAppPage: React.FC = () => {
       <div className="text-center space-y-4 max-w-2xl mx-auto">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-semibold">
           <Smartphone className="w-3.5 h-3.5" />
-          <span>Flutter Android Companion Client</span>
+          <span>Flutter Android Companion Client • v1.0.0 Release</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground leading-tight">
           Stay connected to your support requests wherever you are.
@@ -50,22 +56,47 @@ export const GetMobileAppPage: React.FC = () => {
             variant="primary"
             size="lg"
             leftIcon={<Download className="w-5 h-5" />}
-            onClick={handleDownload}
+            onClick={() => handleDownload(apkDownloadUrl, 'EduHelp-Android-v1.0.0-arm64.apk')}
             className="w-full sm:w-auto shadow-md"
           >
-            Download Android APK (v1.0.0)
+            Download Android APK (ARM64 • 16.6 MB)
           </Button>
-          <span className="text-xs text-muted-foreground">
-            Compatible with Android 8.0+ (API 26+) • 18.4 MB
+          <a
+            href={releasePageUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg border border-border bg-card hover:bg-muted text-xs font-semibold text-foreground transition-colors"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+            GitHub Release Assets
+          </a>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-muted-foreground pt-1">
+          <span className="flex items-center gap-1">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+            Optimized ARM64: <strong>16.58 MB</strong>
           </span>
+          <span>•</span>
+          <span>Android 8.0+ (API 26+)</span>
+          <span>•</span>
+          <a
+            href={universalApkUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline"
+          >
+            Universal APK (46.5 MB)
+          </a>
         </div>
 
         {downloadStarted && (
           <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-lg text-xs font-medium text-emerald-800 dark:text-emerald-300 animate-in fade-in">
-            ✓ Download initiated. Follow the installation steps below to install on your Android device.
+            ✓ Download initiated from GitHub Release. Follow the installation steps below to install on your Android device.
           </div>
         )}
       </div>
+
 
       {/* Interactive Phone Mockup & Key Highlights Showcase */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center bg-card rounded-2xl border border-border p-8 lg:p-12 shadow-card">
@@ -220,20 +251,32 @@ export const GetMobileAppPage: React.FC = () => {
             </div>
           </div>
 
-          {/* QR Code Quick Scan Placeholder */}
+          {/* QR Code Quick Scan */}
           <div className="p-4 bg-muted/50 rounded-xl border border-border flex items-center gap-4">
-            <div className="w-16 h-16 bg-card border border-border rounded-lg flex items-center justify-center text-primary shrink-0 shadow-subtle">
-              <QrCode className="w-10 h-10" />
-            </div>
+            <a
+              href={apkDownloadUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-16 h-16 bg-white border border-border rounded-lg flex items-center justify-center p-1 shrink-0 shadow-subtle hover:scale-105 transition-transform"
+              title="Click or scan to download APK"
+            >
+              <img
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=120x120&margin=0&data=${encodeURIComponent(apkDownloadUrl)}`}
+                alt="Scan to Download EduHelp Android APK"
+                className="w-full h-full object-contain"
+                loading="lazy"
+              />
+            </a>
             <div>
               <span className="text-xs font-semibold text-foreground block">
                 Direct Device Install QR
               </span>
               <p className="text-[11px] text-muted-foreground mt-0.5">
-                Scan with your Android camera to download the APK package directly to your phone.
+                Scan with your Android camera or tap to download the verified 16.6 MB APK directly to your phone.
               </p>
             </div>
           </div>
+
         </div>
       </div>
 
