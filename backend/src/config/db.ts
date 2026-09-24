@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:1234@localhost:5432/eduhelp';
+const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/eduhelp';
 
 export const pool = new Pool({
   connectionString,

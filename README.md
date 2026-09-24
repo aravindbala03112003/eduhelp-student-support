@@ -241,8 +241,8 @@ CREATE DATABASE eduhelp;
 Configure `backend/.env`:
 ```env
 PORT=5000
-DATABASE_URL=postgresql://postgres:1234@localhost:5432/eduhelp
-JWT_SECRET=super-secure-eduhelp-jwt-secret-key-2026-production
+DATABASE_URL=postgresql://<DB_USER>:<DB_PASSWORD>@localhost:5432/eduhelp
+JWT_SECRET=<YOUR_SECURE_JWT_SECRET_KEY>
 NODE_ENV=development
 ```
 
