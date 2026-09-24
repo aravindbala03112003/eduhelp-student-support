@@ -16,8 +16,8 @@ import { Button } from '../components/common/Button.js';
 export const GetMobileAppPage: React.FC = () => {
   const [downloadStarted, setDownloadStarted] = useState(false);
 
-  // APK download URL or placeholder
-  const apkDownloadUrl = '/mobile/eduhelp-companion-v1.0.0.apk';
+  // APK download URL using deployment base
+  const apkDownloadUrl = `${import.meta.env.BASE_URL}mobile/eduhelp-companion-v1.0.0.apk`;
 
   const handleDownload = () => {
     setDownloadStarted(true);
